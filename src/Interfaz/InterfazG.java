@@ -52,9 +52,6 @@ public class InterfazG extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        TFApellidoP = new javax.swing.JTextField();
-        TFApellidoM = new javax.swing.JTextField();
-        TFNombreU = new javax.swing.JTextField();
         BIniciar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaTexto = new javax.swing.JTextArea();
@@ -83,6 +80,11 @@ public class InterfazG extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         BAyuda = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        TFPublicK = new javax.swing.JTextField();
+        CBFatherS = new javax.swing.JComboBox<>();
+        CBMotherS = new javax.swing.JComboBox<>();
+        CBName = new javax.swing.JComboBox<>();
 
         jDialog1.setMinimumSize(new java.awt.Dimension(420, 270));
 
@@ -167,18 +169,6 @@ public class InterfazG extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        TFApellidoM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFApellidoMActionPerformed(evt);
-            }
-        });
-
-        TFNombreU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TFNombreUActionPerformed(evt);
-            }
-        });
-
         BIniciar.setBackground(new java.awt.Color(0, 153, 0));
         BIniciar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         BIniciar.setForeground(new java.awt.Color(255, 255, 255));
@@ -213,7 +203,7 @@ public class InterfazG extends javax.swing.JFrame {
             }
         });
 
-        CBServer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "localhost", "3.210.199.253" }));
+        CBServer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "localhost", "54.87.22.33" }));
         CBServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBServerActionPerformed(evt);
@@ -336,6 +326,14 @@ public class InterfazG extends javax.swing.JFrame {
             }
         });
 
+        jLabel22.setText("Public key:");
+
+        CBFatherS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[x]", "[xx]", "[xxx]", "[xxxx]", "[xxxxx]" }));
+
+        CBMotherS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[x]", "[xx]", "[xxx]", "[xxxx]", "[xxxxx]" }));
+
+        CBName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[x]", "[xx]", "[xxx]", "[xxxx]", "[xxxxx]" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -348,16 +346,20 @@ public class InterfazG extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TFApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TFNombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CBServer, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TFApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(TFPublicK, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CBServer, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(CBName, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE)
+                                .addComponent(CBMotherS, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CBFatherS, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -413,30 +415,34 @@ public class InterfazG extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(SpinnerNS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TFApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TFApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel3)
+                            .addComponent(CBFatherS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TFNombreU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel4)
+                            .addComponent(CBMotherS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(CBName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CBServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(72, 72, 72)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(TFPublicK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BIniciar)
                             .addComponent(BDetener)))
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(325, Short.MAX_VALUE)
@@ -479,9 +485,9 @@ public class InterfazG extends javax.swing.JFrame {
 
         int email = CBEmail.getSelectedIndex();
         int password = CBPassword.getSelectedIndex();
-        String apellidoP = TFApellidoP.getText();
-        String apellidoM = TFApellidoM.getText();
-        String nombreU = TFNombreU.getText();
+        String apellidoP = String.valueOf(CBFatherS.getSelectedIndex());
+        String apellidoM = String.valueOf(CBMotherS.getSelectedIndex());
+        String nombreU = String.valueOf(CBName.getSelectedIndex());
         String tipoU = "Root";
         int sPorSegundo = (Integer) SSolicitudes.getValue();
         int nSolicitudes = (Integer) SpinnerNS.getValue();
@@ -489,6 +495,7 @@ public class InterfazG extends javax.swing.JFrame {
         int aEnviarA = (Integer) sEnvianA.getValue();
         int aEmpieza = (Integer) sEmpieza.getValue();
         String ip = String.valueOf(CBServer.getSelectedItem());
+        String publicK = TFPublicK.getText();
 
         if (apellidoP.isEmpty() || apellidoM.isEmpty() || nombreU.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llena los campos de nombre y apellidos");
@@ -508,6 +515,7 @@ public class InterfazG extends javax.swing.JFrame {
                 objetoH.setaEmpieza(aEmpieza);
                 objetoH.setCaja(areaTexto);
                 objetoH.setIp(ip);
+                objetoH.setPublicKey(publicK);
                 new Thread(objetoH).start();
                 //refreshA();
             } else {
@@ -516,17 +524,9 @@ public class InterfazG extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BIniciarActionPerformed
 
-    private void TFNombreUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFNombreUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFNombreUActionPerformed
-
     private void CBEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CBEmailActionPerformed
-
-    private void TFApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFApellidoMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFApellidoMActionPerformed
 
     private void BAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAyudaActionPerformed
         jDialog1.setVisible(true);
@@ -571,14 +571,15 @@ public class InterfazG extends javax.swing.JFrame {
     private javax.swing.JButton BDetener;
     private javax.swing.JButton BIniciar;
     private javax.swing.JComboBox<String> CBEmail;
+    private javax.swing.JComboBox<String> CBFatherS;
+    private javax.swing.JComboBox<String> CBMotherS;
+    private javax.swing.JComboBox<String> CBName;
     private javax.swing.JComboBox<String> CBPassword;
     private javax.swing.JComboBox<String> CBServer;
     private javax.swing.JSpinner SSolicitudes;
     private javax.swing.JSpinner SpinnerNS;
-    private javax.swing.JTextField TFApellidoM;
-    private javax.swing.JTextField TFApellidoP;
-    private javax.swing.JTextField TFNombreU;
-    private javax.swing.JTextArea areaTexto;
+    private javax.swing.JTextField TFPublicK;
+    public javax.swing.JTextArea areaTexto;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -594,6 +595,7 @@ public class InterfazG extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

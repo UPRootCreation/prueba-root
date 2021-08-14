@@ -30,10 +30,15 @@ public class Hilo implements Runnable {
     private int numberRequest;
     private JTextArea caja;
     private String ip;
+    private String publicKey;
 
     private double aHonesto;
     private double aEnviarA;
     private double aEmpieza;
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
 
     public void setIp(String ip) {
         this.ip = ip;
@@ -64,15 +69,30 @@ public class Hilo implements Runnable {
     }
 
     public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP;
+        this.apellidoP = "";
+        int valor = Integer.parseInt(apellidoP);
+        for (int x = 0; x < (valor + 1); x++) {
+            this.apellidoP += letter();
+        }
+        System.out.println("el apellido paterno:"+this.apellidoP);
     }
 
     public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
+        this.apellidoM = "";
+        int valor = Integer.parseInt(apellidoM);
+        for (int x = 0; x < (valor + 1); x++) {
+            this.apellidoM += letter();
+        }
+        System.out.println("el apellido materno:"+this.apellidoM);
     }
 
     public void setNombreU(String nombreU) {
-        this.nombreU = nombreU;
+        this.nombreU = "";
+        int valor = Integer.parseInt(nombreU);
+        for (int x = 0; x < (valor + 1); x++) {
+            this.nombreU += letter();
+        }
+        System.out.println("el nombre:"+this.nombreU);
     }
 
     public void setTypeU(String typeU) {
@@ -105,12 +125,12 @@ public class Hilo implements Runnable {
                     System.out.println("el random = " + i);
 
                     if (i < aEmpieza) {
-                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                     } else {
                         if (i > aEmpieza && i < aEnviarA) {
-                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                         } else {
-                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                         }
                     }
 
@@ -126,12 +146,12 @@ public class Hilo implements Runnable {
                     System.out.println("el random = " + i);
 
                     if (i < aEnviarA) {
-                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                     } else {
                         if (i > aEnviarA && i < aEmpieza) {
-                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                         } else {
-                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                         }
                     }
 
@@ -152,12 +172,12 @@ public class Hilo implements Runnable {
                         System.out.println("el random = " + i);
 
                         if (i < aEmpieza) {
-                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                         } else {
                             if (i > aEmpieza && i < aHonesto) {
-                                AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                             } else {
-                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                             }
                         }
 
@@ -174,12 +194,12 @@ public class Hilo implements Runnable {
                             System.out.println("el random = " + i);
 
                             if (i < aHonesto) {
-                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                             } else {
                                 if (i > aHonesto && i < aEmpieza) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                 } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                 }
                             }
 
@@ -201,12 +221,12 @@ public class Hilo implements Runnable {
                                 if (i < aEnviarA && i < aEmpieza) {
                                     double elección = Math.random();
                                     if (elección < 0.5) {
-                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                     } else {
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                     }
                                 } else {
-                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                 }
 
                                 TimeUnit.MILLISECONDS.sleep(delay);
@@ -230,12 +250,12 @@ public class Hilo implements Runnable {
                             System.out.println("el random = " + i);
 
                             if (i < aEnviarA) {
-                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                             } else {
                                 if (i > aEnviarA && i < aHonesto) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                 } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                 }
                             }
 
@@ -251,12 +271,12 @@ public class Hilo implements Runnable {
                             System.out.println("el random = " + i);
 
                             if (i < aHonesto) {
-                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                             } else {
                                 if (i > aHonesto && i < aEnviarA) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                 } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                 }
                             }
 
@@ -278,14 +298,14 @@ public class Hilo implements Runnable {
                                 double elección = Math.random();
                                 if (elección < 0.5) {
                                     System.out.println("Enviar algo");
-                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                 } else {
                                     System.out.println("Empieza en algún paso");
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                 }
                             } else {
                                 System.out.println("Agente honesto");
-                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                             }
 
                             TimeUnit.MILLISECONDS.sleep(delay);
@@ -307,13 +327,13 @@ public class Hilo implements Runnable {
                                     double elección = Math.random();
                                     if (elección < 0.5) {
 
-                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                     } else {
-                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                     }
                                 } else {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
-                                }  
+                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
+                                }
 
                                 TimeUnit.MILLISECONDS.sleep(delay);
                             }
@@ -333,12 +353,12 @@ public class Hilo implements Runnable {
                                     if (i < aHonesto && i < aEmpieza) {
                                         double elección = Math.random();
                                         if (elección < 0.5) {
-                                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                         } else {
-                                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip);
+                                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                                         }
                                     } else {
-                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip);
+                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                                     }
 
                                     TimeUnit.MILLISECONDS.sleep(delay);
