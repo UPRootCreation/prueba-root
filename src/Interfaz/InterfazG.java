@@ -71,14 +71,14 @@ public class InterfazG extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         CBEmail = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         sAgenteH = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         sEnvianA = new javax.swing.JSpinner();
-        sEmpieza = new javax.swing.JSpinner();
         jLabel27 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        sEmpieza = new javax.swing.JSpinner();
         BAyuda = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         TFPublicK = new javax.swing.JTextField();
@@ -222,7 +222,7 @@ public class InterfazG extends javax.swing.JFrame {
 
         jLabel6.setText("Server:");
 
-        SpinnerNS.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10000, 1));
+        SpinnerNS.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
         SSolicitudes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 1000, 1));
 
@@ -239,6 +239,8 @@ public class InterfazG extends javax.swing.JFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel7.setText("total: 100%");
+
         jLabel11.setText("HONEST AGENT:");
 
         sAgenteH.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
@@ -249,20 +251,18 @@ public class InterfazG extends javax.swing.JFrame {
 
         sEnvianA.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
-        sEmpieza.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
-
         jLabel27.setText("Begin any step:");
 
-        jLabel7.setText("total: 100%");
+        sEmpieza.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
+        jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(sAgenteH, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(sEnvianA, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(sEmpieza, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel27, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(sEmpieza, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);

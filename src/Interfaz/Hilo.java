@@ -32,9 +32,9 @@ public class Hilo implements Runnable {
     private String ip;
     private String publicKey;
 
-    private double aHonesto;
-    private double aEnviarA;
-    private double aEmpieza;
+    private int aHonesto;
+    private int aEnviarA;
+    private int aEmpieza;
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
@@ -111,336 +111,22 @@ public class Hilo implements Runnable {
     /*public void setEstado(boolean estado) {
         this.estado = estado;
     }*/
-    public void loop() throws InterruptedException {
-        double orden[] = new double[3];
-        if (aHonesto > aEnviarA && aHonesto > aEmpieza) {
-            orden[0] = aHonesto;
-            System.out.println("aHonesto");
-            if (aEnviarA > aEmpieza) {
-                orden[1] = aEnviarA;
-                orden[2] = aEmpieza;
-                //este for debemos dejarlo con otra variable en lugar de x
-                for (int x = 0; x < numberRequest; x++) {
-                    double i = Math.floor(Math.random() * 101);
-                    System.out.println("el random = " + i);
-
-                    if (i < aEmpieza) {
-                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                    } else {
-                        if (i > aEmpieza && i < (aEnviarA + aEmpieza)) {
-                            AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                        } else {
-                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                        }
-                    }
-
-                    TimeUnit.MILLISECONDS.sleep(delay);
-                }
-            } else {
-                if (aEnviarA < aEmpieza) {
-                    orden[2] = aEnviarA;
-                    orden[1] = aEmpieza;
-
-                    for (int x = 0; x < numberRequest; x++) {
-
-                        double i = Math.floor(Math.random() * 101);
-                        System.out.println("el random = " + i);
-
-                        if (i < aEnviarA) {
-                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                        } else {
-                            if (i > aEnviarA && i < (aEmpieza + aEnviarA)) {
-                                AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                            } else {
-                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                            }
-                        }
-
-                        TimeUnit.MILLISECONDS.sleep(delay);
-                    }
+    public void loop1() throws InterruptedException {
+        for (int x = 0; x < numberRequest; x++) {
+            double i = Math.floor(Math.random() * 101);
+            System.out.println("el random = " + i);
+            int desonesto = aHonesto+aEnviarA;
+            if(i<=aHonesto){
+                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
+            }else{
+                if(i<=desonesto){
+                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
                 } else {
-                    if(aEnviarA == aEmpieza){
-                        orden[0] = aHonesto;
-                        orden[1] = aEnviarA;
-                        orden[2] = aEmpieza;
-                        
-                        System.out.println("son iguales enviar algo y aEmpieza");
-
-                            for (int x = 0; x < numberRequest; x++) {
-
-                                double i = Math.floor(Math.random() * 101);
-                                System.out.println("el random = " + i);
-
-                                if (i < aEmpieza) {
-                                    double eleccion = Math.random();
-                                    System.out.println("La eleccion: " + eleccion);
-                                    if (eleccion < 0.5) {
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                    } else {
-                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    }
-                                } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    
-                                }
-
-                                TimeUnit.MILLISECONDS.sleep(delay);
-                            }
-
-                    }
-                }
-
-            }
-        } else {
-            if (aEnviarA > aHonesto && aEnviarA > aEmpieza) {
-                System.out.println("aEnviar");
-                orden[0] = aEnviarA;
-                if (aHonesto > aEmpieza) {
-                    orden[1] = aHonesto;
-                    orden[2] = aEmpieza;
-
-                    for (int x = 0; x < numberRequest; x++) {
-
-                        double i = Math.floor(Math.random() * 101);
-                        System.out.println("el random = " + i);
-
-                        if (i < aEmpieza) {
-                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                        } else {
-                            if (i > aEmpieza && i < (aHonesto + aEmpieza)) {
-                                AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                            } else {
-                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                            }
-                        }
-
-                        TimeUnit.MILLISECONDS.sleep(delay);
-                    }
-                } else {
-                    if (aHonesto < aEmpieza) {
-                        orden[2] = aHonesto;
-                        orden[1] = aEmpieza;
-
-                        for (int x = 0; x < numberRequest; x++) {
-
-                            double i = Math.floor(Math.random() * 101);
-                            System.out.println("el random = " + i);
-
-                            if (i < aHonesto) {
-                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                            } else {
-                                if (i > aHonesto && i < (aEmpieza + aHonesto)) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                }
-                            }
-
-                            TimeUnit.MILLISECONDS.sleep(delay);
-                        }
-                    } else {
-                        //esto lo acabo de poner
-                        if (aHonesto == aEmpieza) {
-                            orden[0] = aEnviarA;
-                            orden[1] = aHonesto;
-                            orden[2] = aEmpieza;
-                            System.out.println("son iguales honesto y aEmpieza");
-
-                            for (int x = 0; x < numberRequest; x++) {
-
-                                double i = Math.floor(Math.random() * 101);
-                                System.out.println("el random = " + i);
-
-                                if (i < aEmpieza) {
-                                    double eleccion = Math.random();
-                                    System.out.println("La eleccion: " + eleccion);
-                                    if (eleccion < 0.5) {
-                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    } else {
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                    }
-                                } else {
-                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                }
-
-                                TimeUnit.MILLISECONDS.sleep(delay);
-                            }
-
-                        }
-                    }
-
-                }
-            } else {
-                if (aEmpieza > aHonesto && aEmpieza > aEnviarA) {
-                    System.out.println("aEmpieza");
-                    orden[0] = aEmpieza;
-                    if (aHonesto > aEnviarA) {
-                        orden[1] = aHonesto;
-                        orden[2] = aEnviarA;
-
-                        for (int x = 0; x < numberRequest; x++) {
-
-                            double i = Math.floor(Math.random() * 101);
-                            System.out.println("el random = " + i);
-
-                            if (i < aEnviarA) {
-                                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                            } else {
-                                if (i > aEnviarA && i < (aHonesto + aEnviarA)) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                } else {
-                                    AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                }
-                            }
-
-                            TimeUnit.MILLISECONDS.sleep(delay);
-                        }
-                    } else {
-                        if (aHonesto < aEnviarA) {
-                            orden[2] = aHonesto;
-                            orden[1] = aEnviarA;
-
-                            for (int x = 0; x < numberRequest; x++) {
-
-                                double i = Math.floor(Math.random() * 101);
-                                System.out.println("el random = " + i);
-
-                                if (i < aHonesto) {
-                                    AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                } else {
-                                    if (i > aHonesto && i < (aEnviarA + aHonesto)) {
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                    } else {
-                                        AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    }
-                                }
-
-                                TimeUnit.MILLISECONDS.sleep(delay);
-                            }
-                        } else {
-                            if (aHonesto == aEnviarA) {
-                                System.out.println("honesto=enviaralgo");
-                                orden[0] = aEmpieza;
-                                orden[1] = aHonesto;
-                                orden[2] = aEnviarA;
-
-                                for (int x = 0; x < numberRequest; x++) {
-
-                                    double i = Math.floor(Math.random() * 101);
-                                    System.out.println("el random = " + i);
-
-                                    if (i < aEnviarA) {
-                                        //aviento un bolado para ver que tipo de consulta va primero
-                                        double eleccion = Math.random();
-                                        System.out.println("La eleccion: " + eleccion);
-                                        if (eleccion < 0.5) {
-                                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                        } else {
-                                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                        }
-                                    } else {
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                    }
-
-                                    TimeUnit.MILLISECONDS.sleep(delay);
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    if (aHonesto < aEnviarA && aHonesto < aEmpieza && aEnviarA == aEmpieza) {
-                        orden[0] = aEnviarA;
-                        orden[1] = aEmpieza;
-                        orden[2] = aHonesto;
-                        System.out.println("son iguales aEnviarA y aEmpieza");
-                        for (int x = 0; x < numberRequest; x++) {
-
-                            double i = Math.floor(Math.random() * 101);
-                            System.out.println("el random = " + i);
-
-                            if (i < aHonesto) {
-                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                            } else {
-                                    double eleccion = Math.random();
-                                    System.out.println("La eleccion: " + eleccion);
-                                    if (eleccion < 0.5) {
-                                        System.out.println("Enviar algo");
-                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    } else {
-                                        System.out.println("Empieza en algún paso");
-                                        AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                    
-                                }
-                            }
-
-                            TimeUnit.MILLISECONDS.sleep(delay);
-                        }
-                    } else {
-                        if (aEmpieza < aHonesto && aEmpieza < aEnviarA && aHonesto == aEnviarA) {
-                            orden[0] = aHonesto;
-                            orden[1] = aEnviarA;
-                            orden[2] = aEmpieza;
-
-                            System.out.println("son iguales aEnviarA y aEmpieza");
-
-                            for (int x = 0; x < numberRequest; x++) {
-
-                                double i = Math.floor(Math.random() * 101);
-                                System.out.println("el random = " + i);
-
-                                if (i < aEmpieza) {
-                                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                } else {
-                                        //aviento un bolado para ver que tipo de consulta va primero
-                                        double eleccion = Math.random();
-                                        System.out.println("La eleccion: " + eleccion);
-                                        if (eleccion < 0.5) {
-                                            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                        } else {
-                                            AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                        }
-                                }
-
-                                TimeUnit.MILLISECONDS.sleep(delay);
-                            }
-                        } else {
-                            if (aHonesto > aEnviarA && aHonesto == aEmpieza) {
-                                orden[0] = aHonesto;
-                                orden[1] = aEmpieza;
-                                orden[2] = aEnviarA;
-
-                                System.out.println("son iguales Honesto y aEmpieza");
-
-                                for (int x = 0; x < numberRequest; x++) {
-
-                                    double i = Math.floor(Math.random() * 101);
-                                    System.out.println("el random = " + i);
-                                    if (i < aEnviarA) {
-                                        AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                    } else {
-                                        if (i < (aEnviarA + aEmpieza)) {
-                                            double eleccion = Math.random();
-                                            System.out.println("La eleccion: " + eleccion);
-                                            if (eleccion < 0.5) {
-                                                AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                                            } else {
-                                                AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                                            }
-                                        }
-                                    }
-                                    TimeUnit.MILLISECONDS.sleep(delay);
-                                }
-                            }
-                        }
-                    }
+                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
                 }
             }
+            TimeUnit.MILLISECONDS.sleep(delay);
         }
-
-        System.out.println(orden[0]);
-        System.out.println(orden[1]);
-        System.out.println(orden[2]);
-
     }
 
     public String generateEmail() {
@@ -493,7 +179,7 @@ public class Hilo implements Runnable {
     public void run() {
         try {
             //caja.append("lalo");
-            loop();
+            loop1();
         } catch (InterruptedException ex) {
             Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
         }
