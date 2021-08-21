@@ -31,11 +31,17 @@ public class Hilo implements Runnable {
     private JTextArea caja;
     private String ip;
     private String publicKey;
+    private String tipoConsulta;
 
     private int aHonesto;
     private int aEnviarA;
     private int aEmpieza;
 
+    
+    public void setTipoConsulta(String tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
+    }
+    
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
     }
@@ -112,7 +118,7 @@ public class Hilo implements Runnable {
         this.estado = estado;
     }*/
     public void loop1() throws InterruptedException {
-        for (int x = 0; x < numberRequest; x++) {
+        /*for (int x = 0; x < numberRequest; x++) {
             double i = Math.floor(Math.random() * 101);
             System.out.println("el random = " + i);
             int desonesto = aHonesto+aEnviarA;
@@ -126,6 +132,17 @@ public class Hilo implements Runnable {
                 }
             }
             TimeUnit.MILLISECONDS.sleep(delay);
+        }*/
+        if(tipoConsulta=="honesto"){
+            AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
+        }else{
+            if(tipoConsulta=="enviarAlgo"){
+                AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
+            } else{
+                if(tipoConsulta=="empiezaAlgun"){
+                    AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
+                }
+            }
         }
     }
 
