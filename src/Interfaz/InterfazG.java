@@ -40,22 +40,26 @@ public class InterfazG extends javax.swing.JFrame {
             int desonesto = aHonesto + aEnviarA;
             if (i <= aHonesto) {
                 //AgentsHonest a = new AgentsHonest(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                JButton boton = new JButton("Agente honesto");
+                JButton boton = new JButton("Honest agent");
                 boton.setPreferredSize(new Dimension(30, 70));
                 boton.setBackground(Color.GREEN);
                 jPanel2.add(boton);
                 botones.add(boton); //agrego el boton
-                
+
                 boton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
+                        int aHonesto = (Integer) sAgenteH.getValue();
+                        int aEnviarA = (Integer) sEnvianA.getValue();
+                        int aEmpieza = (Integer) sEmpieza.getValue();
+                        int pTotal = aHonesto + aEnviarA + aEmpieza;
                         consultaHonesta();
                     }
                 });
             } else {
                 if (i <= desonesto) {
                     //AgentsSendAnything b = new AgentsSendAnything(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, ip, publicKey);
-                    JButton boton = new JButton("Agente deshonesto envía algo");
+                    JButton boton = new JButton("Dishonest agent send something");
                     boton.setPreferredSize(new Dimension(30, 70));
                     boton.setBackground(Color.ORANGE);
                     jPanel2.add(boton);
@@ -69,7 +73,7 @@ public class InterfazG extends javax.swing.JFrame {
                     });
                 } else {
                     //AgentsStartAnyStep c = new AgentsStartAnyStep(caja, generateEmail(), generatePassword(), nombreU, apellidoP, apellidoM, typeU, numberRequest, ip, publicKey);
-                    JButton boton = new JButton("Agente deshonesto empieza en algún paso");
+                    JButton boton = new JButton("Dishonest agent begin any step");
                     boton.setPreferredSize(new Dimension(30, 70));
                     boton.setBackground(Color.YELLOW);
                     jPanel2.add(boton);
@@ -88,8 +92,8 @@ public class InterfazG extends javax.swing.JFrame {
 
         jPanel2.updateUI();
     }
-    
-    private void consultaHonesta(){
+
+    private void consultaHonesta() {
         areaTexto.setText("");
         objetoH = new Hilo();
 
@@ -107,10 +111,13 @@ public class InterfazG extends javax.swing.JFrame {
         String ip = String.valueOf(CBServer.getSelectedItem());
         String publicK = TFPublicK.getText();
         String tipoConsulta = "honesto";
+
+        int pTotal = aHonesto + aEnviarA + aEmpieza;
+
         if (publicK.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa la llave pública");
         } else {
-            if ((aHonesto + aEnviarA + aEmpieza) == 100) {
+            if (pTotal == 100) {
                 jDialog2.setVisible(true);
                 objetoH.setEmail(email);
                 objetoH.setPassword(password);
@@ -134,8 +141,8 @@ public class InterfazG extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void consultaEnviar(){
+
+    private void consultaEnviar() {
         areaTexto.setText("");
         objetoH = new Hilo();
 
@@ -153,10 +160,13 @@ public class InterfazG extends javax.swing.JFrame {
         String ip = String.valueOf(CBServer.getSelectedItem());
         String publicK = TFPublicK.getText();
         String tipoConsulta = "enviarAlgo";
+
+        int pTotal = aHonesto + aEnviarA + aEmpieza;
+
         if (publicK.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa la llave pública");
         } else {
-            if ((aHonesto + aEnviarA + aEmpieza) == 100) {
+            if (pTotal == 100) {
                 jDialog2.setVisible(true);
                 objetoH.setEmail(email);
                 objetoH.setPassword(password);
@@ -180,8 +190,8 @@ public class InterfazG extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void consultaEmpezarA(){
+
+    private void consultaEmpezarA() {
         areaTexto.setText("");
         objetoH = new Hilo();
 
@@ -199,10 +209,13 @@ public class InterfazG extends javax.swing.JFrame {
         String ip = String.valueOf(CBServer.getSelectedItem());
         String publicK = TFPublicK.getText();
         String tipoConsulta = "empiezaAlgun";
+
+        int pTotal = aHonesto + aEnviarA + aEmpieza;
+
         if (publicK.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa la llave pública");
         } else {
-            if ((aHonesto + aEnviarA + aEmpieza) == 100) {
+            if (pTotal == 100) {
                 jDialog2.setVisible(true);
                 objetoH.setEmail(email);
                 objetoH.setPassword(password);
@@ -684,7 +697,21 @@ public class InterfazG extends javax.swing.JFrame {
         int nSolicitudes = (Integer) SpinnerNS.getValue();
         int aHonesto = (Integer) sAgenteH.getValue();
         int aEnviarA = (Integer) sEnvianA.getValue();
-        crearB(nSolicitudes, aHonesto, aEnviarA);
+        int aEmpieza = (Integer) sEmpieza.getValue();
+        int pTotal = aHonesto + aEnviarA + aEmpieza;
+        String publicK = TFPublicK.getText();
+
+        if (!publicK.isEmpty()) {
+            if (pTotal == 100) {
+                crearB(nSolicitudes, aHonesto, aEnviarA);
+            } else {
+                JOptionPane.showMessageDialog(null, "Los porcentajes no cubren el 100%");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresa la llave pública");
+        }
+
+
     }//GEN-LAST:event_BIniciarActionPerformed
 
     private void CBEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBEmailActionPerformed
